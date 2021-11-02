@@ -1,31 +1,34 @@
-#' Code Examples to process WTIS address components into a ‘Clean Address’ for geocoding with Google Maps API:
+# Coding Examples for Supplemental Materials
 
-#' Concatenate multiple variables to  ‘Street’ variable with R base unite() and dplyr’s pipe (%>%). 
+
+# Process WTIS address components into a ‘Clean Address’ for geocoding with Google Maps API:
+
+# Concatenate multiple variables to  ‘Street’ variable with R base unite() and dplyr’s pipe (%>%). 
 
 dff %>% unite(Street , src.street.no , src.street.name , src.street.type , src.street.direction , sep = " , ", remove = FALSE)
 
-#' Concatenate multiple variables into the ‘City’ variable with R base
+# Concatenate multiple variables into the ‘City’ variable with R base
 dff %>% unite(City , SrcLot , SrcLotConc , SrcCityTownMun , sep = " , ", remove = FALSE)
 
-#' Create the Province variable and set the value to “Ontario”.
- dff %>% mutate(Province = “Ontario”)
+# Create the Province variable and set the value to “Ontario”.
+dff %>% mutate(Province = “Ontario”)
 
-#' Remove NA's from clean_address
+# Remove NA's from clean_address
 gsub("NA ,", "", dff$clean_address)
 
-#' Remove ","  from clean_address 
+# Remove ","  from clean_address 
 gsub("\\S,", "", dff$clean_address)
 
-#' Remove underscores from clean_address
+# Remove underscores from clean_address
 gsub("\\S+_", "", dff$clean_address) 
 
-#' Code Examples to Geocode ‘Clean Address’ with Placement package’s geocode_url () and Google Maps Geocoder API 
-geocode_url(dff$clean_address, privkey = “google private key", messages = TRUE, dryrun = FALSE)
+# Code Examples to Geocode ‘Clean Address’ with Placement package’s geocode_url () and Google Maps Geocoder API 
+geocode_url(dff$clean_address, privkey = 'google private key', messages = TRUE, dryrun = FALSE)
 
-#' Check Google geocoded results for successful geocoding result (Status ==“OK”)
+# Check Google geocoded results for successful geocoding result (Status ==“OK”)
 
 dff %>% filter(dff$result, Status ==“OK”)
 
-#' Bind the successful geocoded address to the dataframe
+# Bind the successful geocoded address to the dataframe
 
 bind_cols(dff, geocoded results)
