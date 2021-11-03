@@ -1,1 +1,12 @@
 
+# Code Example to Geocode ‘Clean Address’ with Placement package’s geocode_url () and Google Maps Geocoder API 
+
+geocode_url(dff$clean_address, privkey = 'google private key', messages = TRUE, dryrun = FALSE)
+
+# Check Google geocoded results for successful geocoding result (Status ==“OK”)
+
+dff %>% filter(dff$result, Status ==“OK”)
+
+# Bind the successful geocoded address to the dataframe
+
+bind_cols(dff, geocoded results)
